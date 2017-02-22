@@ -80,7 +80,7 @@ def makeWebhookResult(req):
 						todayCardData.append([colName.strip().capitalize(), valType, val])
 				if todayCardData:
 					speech = 'Todays morning report is as follows...'+'\n' + ". \n".join( [str(colName) + " is " + str(valType) + str(val)  for colName, valType, val in todayCardData] )
-					speech = speech + "Would you like to hear the month to date metrics of your practice?"
+					speech = speech + ". Would you like to hear the month to date metrics of your practice?"
 				
 		elif req.get("result").get("action") == 'morning_report_continue':
 			if monthCardData:
