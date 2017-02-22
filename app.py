@@ -30,7 +30,7 @@ def webhook():
 	#res = makeWebhookResult(req)
 	# add to worker queue
 	res = q.enqueue(makeWebhookResult, req)
-	print 'blah blah', res['fulfillment']
+	print '+++++++++++++++++', res['result']['fulfillment']
 	
 	while True:
 		if res:
