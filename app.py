@@ -30,8 +30,7 @@ def webhook():
 	#res = makeWebhookResult(req)
 	# add to worker queue
 	res = q.enqueue(makeWebhookResult, req)
-	print '+++++++++++++++++', res['result']['fulfillment']
-	
+	print '+++++++++++++++++', res['result']	
 	while True:
 		if res:
 			res = json.dumps(res, indent=4)
