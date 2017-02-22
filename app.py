@@ -1,4 +1,5 @@
 from reports import makeWebhookResult
+import time
 import urllib
 import json
 import os
@@ -41,7 +42,7 @@ def makeWebhookResult(req):
 	#login_response = json.load(html)
 	#request_key = login_response['profiles'][0]['request_key']
 	#domain = login_response['profiles'][0]['profile_type']
-	request_key = '952bce8b73d55ca2a6715c1520c80b2a'
+	request_key = 'cf457ff56d7ae949f6b28b8d5faf770b'
 	domain = 'Dental'
 	
 	speech = ""
@@ -52,6 +53,7 @@ def makeWebhookResult(req):
 	monthCardData = []
 	if(request_key):
 		if req.get("result").get("action") == 'morning_report':
+			time.sleep(10)
 			speech = "MR reporting"
 			
 			"""
@@ -73,6 +75,7 @@ def makeWebhookResult(req):
 			"""
 				
 		elif req.get("result").get("action") == 'appointments':
+			time.sleep(10)
 			speech = "AP reporting"
 			
 			"""
