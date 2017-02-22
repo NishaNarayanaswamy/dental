@@ -73,6 +73,7 @@ def makeWebhookResult(req):
 			"""
 				
 		elif req.get("result").get("action") == 'appointments':
+			speech = "AP reporting"
 			
 			"""
 			url3  = 'https://api.sikkasoft.com/v2/appointments?request_key='+request_key+'&startdate='+today+'&enddate='+today+'&sort_order=asc&sort_by=appointment_time&fields=patient_name,time,type,guarantor_name,length'
