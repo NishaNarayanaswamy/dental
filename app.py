@@ -27,13 +27,20 @@ def webhook():
 	print('Request:')
 	print(json.dumps(req, indent=4))
 
-	res = makeWebhookResult(req)
-	res = json.dumps(res, indent=4)
-	print(res)
-	r = make_response(res)
-	r.headers['Content-Type'] = 'application/json'
-	return r
+	#res = makeWebhookResult(req)
+	# add to worker queue
+	res = q.enqueue(makeWebhookResult, req)
+	
+	while True:
+		if res:
+			res = json.dumps(res, indent=4)
+			print(res)
+			r = make_response(res)
+			r.headers['Content-Type'] = 'application/json'
+			return r
 
+
+"""
 def makeWebhookResult(req):
 	
 	# demo account login - use manual request key everyday
@@ -53,10 +60,8 @@ def makeWebhookResult(req):
 	monthCardData = []
 	if(request_key):
 		if req.get("result").get("action") == 'morning_report':
-			time.sleep(10)
 			speech = "MR reporting"
 			
-			"""
 			url2  = 'https://api.sikkasoft.com/v2/sikkanet_cards/Morning%20Report?request_key='+request_key+'&startdate='+today+'&enddate='+today
 			html2 = urlopen(url2)
         		response = json.load(html2)
@@ -72,13 +77,11 @@ def makeWebhookResult(req):
 						todayCardData.append([colName.strip().capitalize(), valType, val])
 				if monthCardData:
 					speech = 'Your current month to date morning report is as follows...'+'\n' + ". \n".join( [str(colName) + " is " + str(valType) + str(val)  for colName, valType, val in monthCardData] )
-			"""
+
 				
 		elif req.get("result").get("action") == 'appointments':
-			time.sleep(10)
 			speech = "AP reporting"
-			
-			"""
+
 			url3  = 'https://api.sikkasoft.com/v2/appointments?request_key='+request_key+'&startdate='+today+'&enddate='+today+'&sort_order=asc&sort_by=appointment_time&fields=patient_name,time,type,guarantor_name,length'
 			html3 = urlopen(url3)
         		response = json.load(html3)
@@ -117,13 +120,14 @@ def makeWebhookResult(req):
 							speech = "You have "+str(count)+" appointments remaining for the day. Your next patient, " + patient_name +"... will arrive at "+first_apmnt+". Your last appointment is at " + last_apmnt.strftime("%I:%M %p")+"."
 				else:
 					speech = "You have no scheduled appointments today."
-	"""
+
 
 	return {
 	 	"speech":speech,
 	 	"displayText":speech,
 	 	"source":"apiai-dental"
 	 }
+"""
 
 if __name__ == '__main__':
 	port = int(os.getenv('PORT', 5000)) # flask is on 5000
