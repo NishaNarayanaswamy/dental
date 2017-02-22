@@ -29,7 +29,7 @@ def webhook():
 
 	#res = makeWebhookResult(req)
 	# add to worker queue
-	res = q.enqueue(makeWebhookResult, req)
+	res = q.enqueue(makeWebhookResult, 'test')
 	print '+++++++++++++++++', res
 	while True:
 		if res:
