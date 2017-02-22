@@ -83,8 +83,7 @@ def makeWebhookResult(req):
 					speech = speech + ". Would you like to hear the month to date metrics of your practice?"
 				
 		elif req.get("result").get("action") == 'morning_report_continue':
-			if monthCardData:
-				speech = 'Your month to date practice metrics are as follows...'+'\n' + ". \n".join( [str(colName) + " is " + str(valType) + str(val)  for colName, valType, val in monthCardData] )
+			speech = 'Your month to date practice metrics are as follows...'+'\n' + ". \n".join( [str(colName) + " is " + str(valType) + str(val)  for colName, valType, val in monthCardData] )
 				
 		elif req.get("result").get("action") == 'appointments':
 			speech = "AP reporting"
