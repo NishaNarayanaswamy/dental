@@ -42,7 +42,7 @@ def makeWebhookResult(req):
 	#login_response = json.load(html)
 	#request_key = login_response['profiles'][0]['request_key']
 	#domain = login_response['profiles'][0]['profile_type']
-	request_key = 'cf457ff56d7ae949f6b28b8d5faf770b'
+	request_key = '026c6248268b824ef8f9e829f3425aa6'
 	domain = 'Dental'
 	
 	speech = ""
