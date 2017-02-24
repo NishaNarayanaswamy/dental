@@ -187,7 +187,7 @@ def makeWebhookResult(req):
 			with open('session.txt', 'w') as outfile:
 				outfile.write('hello world')
 				print '+++++++++++++++++++++++++ writing to file +++++++++++++++++++++++++ '
-				print outfile.name
+				print os.path.realpath(outfile.name)
 							
 		elif req.get("result").get("action") == 'no_inventory':
 			speech = "Good-bye!"
