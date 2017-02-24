@@ -176,6 +176,9 @@ def makeWebhookResult(req):
 		elif req.get("result").get("action") == 'inventory':
 			speech = "Based on your scheduled appointments, you will require some additional supplies, totaling $100. ...Would you like to hear the list of supplies required?"
 			
+			print ("++++++ before session: ", session)
+			print ("++++++ before session calc: ", session.get('calc') )
+			
 			session['calc'] = "inventory"
 			
 			print ("++++++ session: ", session)
@@ -190,6 +193,8 @@ def makeWebhookResult(req):
 			#print inventory_json
 					
 		elif req.get("result").get("action") == 'no_inventory':
+			print ("++++++ session NO: ", session)
+			print ("++++++ session calc NO: ", session.get('calc') )
 			speech = "Good-bye!"
 		
 		elif req.get("result").get("action") == 'read_first_item':
