@@ -22,6 +22,7 @@ app = Flask(__name__)
 
 # secret key for session
 app.secret_key = "123456"
+session['calc'] = ""
 
 @app.route('/webhook', methods=['POST'])
 def webhook():
