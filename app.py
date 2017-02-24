@@ -27,7 +27,14 @@ app.secret_key = "123456"
 
 @app.route('/')
 def index():
-	session['calc'] = "empty"
+	sumSessionCounter()
+
+
+def sumSessionCounter():
+	try:
+		session['calc'] = "init"
+	except KeyError:
+		session['calc'] = "empty"
 
 @app.route('/webhook', methods=['POST'])
 def webhook():
@@ -169,7 +176,7 @@ def makeWebhookResult(req):
 		elif req.get("result").get("action") == 'inventory':
 			speech = "Based on your scheduled appointments, you will require some additional supplies, totaling $100. ...Would you like to hear the list of supplies required?"
 			
-			session['calc'] = "testing 1"
+			session['calc'] = "inventory"
 			
 			temp = req.get("result").get("contexts")
 			if temp[0].get("name") == 'calc':
