@@ -20,10 +20,12 @@ from flask import make_response
 # start app in global layout
 app = Flask(__name__)
 
-@app.route('/webhook', methods=['POST'])
+@app.route('/webhook?test_sess_var=empty', methods=['POST'])
 def webhook():
 	req = request.get_json(silent=True, force=True)
 
+	print('**** args: ',request.args)
+	
 	print('Request:')
 	print(json.dumps(req, indent=4))
 
