@@ -20,7 +20,7 @@ from flask import make_response
 # start app in global layout
 app = Flask(__name__)
 with app.app_context():
-	session['calc'] = "empty"
+	print current_app.name
 
 # secret key for session
 app.secret_key = "123456"
