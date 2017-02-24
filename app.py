@@ -184,9 +184,12 @@ def makeWebhookResult(req):
 		elif req.get("result").get("action") == 'inventory':
 			speech = "Based on your scheduled appointments, you will require some additional supplies, totaling $100. ...Would you like to hear the list of supplies required?"
 			
-			with open('dental/inventory.txt', 'w') as outfile:
-				outfile.write('hello world')
-				print '+++++++++++++++++++++++++ writing to file +++++++++++++++++++++++++ '
+			with open('inventory.txt', 'r') as outfile:
+				line = outfile.readline()
+				print " ++++++++++ read file line 1: +++++++++++++++++", line
+				
+				#outfile.write('hello world')
+				#print '+++++++++++++++++++++++++ writing to file +++++++++++++++++++++++++ '
 				print os.path.realpath(outfile.name)
 							
 		elif req.get("result").get("action") == 'no_inventory':
