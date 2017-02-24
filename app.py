@@ -22,10 +22,11 @@ app = Flask(__name__)
 
 # secret key for session
 app.secret_key = "123456"
-session['calc'] = ""
 
 @app.route('/webhook', methods=['POST'])
 def webhook():
+	session['calc'] = ""
+	
 	req = request.get_json(silent=True, force=True)
 
 	print('**** args: ',request.args)
