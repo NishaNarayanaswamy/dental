@@ -165,14 +165,15 @@ def makeWebhookResult(req):
 		elif req.get("result").get("action") == 'read_first_item':
 			speech = "Kirkland Signature Nitrile Exam Glove Medium, 2-Pack, 200-Count. Would you like to order this item?"
 			
-		elif req.get("result").get("action") == 'no_inventory':
+		elif req.get("result").get("action") == 'confirm_item':
+			speech = "Item has been placed. Would you like to continue?"
 			
-		elif req.get("result").get("action") == 'no_inventory':
+		elif req.get("result").get("action") == 'read_next_item':
+			speech = "Walgreens Dental Mirror, Pick & Scaler Kit. Would you like to order this item?"
 			
-		elif req.get("result").get("action") == 'no_inventory':
-		
-		elif req.get("result").get("action") == 'no_inventory':
-			
+		elif req.get("result").get("action") == 'invoice':
+			speech = "Item has been placed. An invoice of #calc.price1 + #calc.price2 has been emailed to you from Google Express."
+	
 			
 	return {
 	 	"speech":speech,
