@@ -25,7 +25,6 @@ app.secret_key = "123456"
 
 @app.route('/webhook', methods=['POST'])
 def webhook():
-	session['calc'] = ""
 	
 	req = request.get_json(silent=True, force=True)
 
@@ -199,6 +198,9 @@ def makeWebhookResult(req):
 
 
 if __name__ == '__main__':
+	
+	session['calc'] = ""
+	
 	port = int(os.getenv('PORT', 5000)) # flask is on 5000
 
 	print "Starting app om port %d", port
