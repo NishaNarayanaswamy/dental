@@ -58,7 +58,7 @@ def makeWebhookResult(req):
 			url2  = 'https://api.sikkasoft.com/v2/sikkanet_cards/Morning%20Report?request_key='+request_key+'&startdate='+today+'&enddate='+today
 			html2 = urlopen(url2)
         		response = json.load(html2)
-			
+						
 			#morning_report_json = '{"KPIData": [{"Value": [{"avg": 17603.938181818183, "Regionalavg": "$17,604", "ColName": "Scheduled Production", "value": 2535, "total": 193643.32, "RegionalTotal": "$193,643", "RegionalValue": "$2,535"}, {"avg": 17603.938181818183, "Regionalavg": "$17,604", "ColName": "Sch Production for Rest of month", "value": 24806, "total": 193643.32, "RegionalTotal": "$193,643", "RegionalValue": "$24,806"}, {"avg": 17603.938181818183, "Regionalavg": "17,604", "ColName": "Month to date New Patients", "value": 27, "total": 193643.32, "RegionalTotal": "193,643", "RegionalValue": "27"}, {"avg": 17603.938181818183, "Regionalavg": "17,604", "ColName": "Month to date patients seen", "value": 333, "total": 193643.32, "RegionalTotal": "193,643", "RegionalValue": "333"}, {"avg": 17603.938181818183, "Regionalavg": "$17,604", "ColName": "Month to date collection", "value": 72440.32, "total": 193643.32, "RegionalTotal": "$193,643", "RegionalValue": "$72,440"}, {"avg": 17603.938181818183, "Regionalavg": "17,604", "ColName": "todays new patients", "value": 0, "total": 193643.32, "RegionalTotal": "193,643", "RegionalValue": "0"}, {"avg": 17603.938181818183, "Regionalavg": "$17,604", "ColName": "month to date production", "value": 93475, "total": 193643.32, "RegionalTotal": "$193,643", "RegionalValue": "$93,475"}, {"avg": 17603.938181818183, "Regionalavg": "17,604", "ColName": "Todays patients going inactive", "value": 2, "total": 193643.32, "RegionalTotal": "193,643", "RegionalValue": "2"}, {"avg": 17603.938181818183, "Regionalavg": "17,604", "ColName": "todays patient pending treatment plan", "value": 4, "total": 193643.32, "RegionalTotal": "193,643", "RegionalValue": "4"}, {"avg": 17603.938181818183, "Regionalavg": "17,604", "ColName": "Scheduled Appointment", "value": 15, "total": 193643.32, "RegionalTotal": "193,643", "RegionalValue": "15"}, {"avg": 17603.938181818183, "Regionalavg": "17,604", "ColName": "todays patient pending balance", "value": 6, "total": 193643.32, "RegionalTotal": "193,643", "RegionalValue": "6"}], "Key": "Actual"}], "KPIInfo": {"KPIName": "Morning Report", "ChartType": ["$", "$", "#", "#", "$", "#", "$", "#", "#", "#", "#"], "InitialTabs": "", "KPIType": ["Column"]}}'
 			#response = json.loads(morning_report_json)
 			
@@ -151,9 +151,6 @@ def makeWebhookResult(req):
 				else:
 					speech = "You have no scheduled appointments today."
 			
-		#elif req.get("result").get("action") == 'morning_report_continue':
-
-
 	return {
 	 	"speech":speech,
 	 	"displayText":speech,
