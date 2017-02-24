@@ -25,6 +25,10 @@ with app.app_context():
 # secret key for session
 app.secret_key = "123456"
 
+@app.route('/')
+def index():
+	session['calc'] = "empty"
+
 @app.route('/webhook', methods=['POST'])
 def webhook():
 	
