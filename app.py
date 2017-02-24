@@ -155,6 +155,24 @@ def makeWebhookResult(req):
 							speech = "test ---- You have "+str(count)+" appointments remaining for the day. Your next patient, " + patient_name +"... will arrive at "+first_apmnt+". Your last appointment is at " + last_apmnt.strftime("%I:%M %p")+"."
 				else:
 					speech = "You have no scheduled appointments today."
+		
+		elif req.get("result").get("action") == 'inventory':
+			speech = "Based on your scheduled appointments, you will require some additional supplies, totaling $100. ...Would you like to hear the list of supplies required?"
+		
+		elif req.get("result").get("action") == 'no_inventory':
+			speech = "Good-bye!"
+		
+		elif req.get("result").get("action") == 'read_first_item':
+			speech = "Kirkland Signature Nitrile Exam Glove Medium, 2-Pack, 200-Count. Would you like to order this item?"
+			
+		elif req.get("result").get("action") == 'no_inventory':
+			
+		elif req.get("result").get("action") == 'no_inventory':
+			
+		elif req.get("result").get("action") == 'no_inventory':
+		
+		elif req.get("result").get("action") == 'no_inventory':
+			
 			
 	return {
 	 	"speech":speech,
