@@ -29,8 +29,6 @@ def webhook():
 	
 	req = request.get_json(silent=True, force=True)
 
-	print('**** args: ',request.args)
-	
 	print('Request:')
 	print(json.dumps(req, indent=4))
 
@@ -177,7 +175,7 @@ def makeWebhookResult(req):
 			#print inventory_json
 					
 		elif req.get("result").get("action") == 'no_inventory':
-			print session['calc']
+			print " ++++++++++++++++++++ ", session['calc']
 			speech = "Good-bye!"
 		
 		elif req.get("result").get("action") == 'read_first_item':
