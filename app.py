@@ -10,7 +10,7 @@ import datetime
 import re
 import math
 from flask import Flask
-from flask import request, session
+from flask import request, session, current_app
 from flask import make_response
 
 #from rq import Queue
@@ -19,6 +19,8 @@ from flask import make_response
 
 # start app in global layout
 app = Flask(__name__)
+with app.app_context():
+	session['calc'] = "empty"
 
 # secret key for session
 app.secret_key = "123456"
@@ -198,8 +200,6 @@ def makeWebhookResult(req):
 
 
 if __name__ == '__main__':
-	
-	session['calc'] = ""
 	
 	port = int(os.getenv('PORT', 5000)) # flask is on 5000
 
