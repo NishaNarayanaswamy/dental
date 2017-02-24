@@ -19,8 +19,6 @@ from flask import make_response
 
 # start app in global layout
 app = Flask(__name__)
-with app.app_context():
-	print current_app.name
 
 # secret key for session
 app.secret_key = "123456"
@@ -28,7 +26,6 @@ app.secret_key = "123456"
 @app.route('/')
 def index():
 	sumSessionCounter()
-
 
 def sumSessionCounter():
 	try:
@@ -61,6 +58,17 @@ def makeWebhookResult(req):
 	#domain = login_response['profiles'][0]['profile_type']
 	request_key = '026c6248268b824ef8f9e829f3425aa6'
 	domain = 'Dental'
+	
+	# inventory items
+	inventory_list = {  "items": ["",    # Keep 0th index empty
+                                     "1 exam gloves", 
+                                     "2 sanitizer", 
+                                     "3 amalgam",
+                                     "4 item 4" ],
+                            "quantity": ["", "1", "1", "1","1"],
+                            "itemPrice": ["", "29.95", "98.70", "99", "10"],
+                            "itemCount": "4"
+                        }
 	
 	speech = ""
 	
@@ -176,25 +184,10 @@ def makeWebhookResult(req):
 		elif req.get("result").get("action") == 'inventory':
 			speech = "Based on your scheduled appointments, you will require some additional supplies, totaling $100. ...Would you like to hear the list of supplies required?"
 			
-			print ("++++++ before session: ", session)
-			print ("++++++ before session calc: ", session.get('calc') )
-			
-			session['calc'] = "inventory"
-			
-			print ("++++++ session: ", session)
-			print ("++++++ session calc: ", session.get('calc') )
-			
-			temp = req.get("result").get("contexts")
-			if temp[0].get("name") == 'calc':
-				print 'hereee'
-				temp[0]['parameters'] = {10}
-				
-			#inventory_json = requests.get("https://github.com/NishaNarayanaswamy/dental/blob/master/inventory.json")
-			#print inventory_json
-					
+			with open('session.txt', 'w') as outfile:
+				outfile.write('hello world')
+							
 		elif req.get("result").get("action") == 'no_inventory':
-			print ("++++++ session NO: ", session)
-			print ("++++++ session calc NO: ", session.get('calc') )
 			speech = "Good-bye!"
 		
 		elif req.get("result").get("action") == 'read_first_item':
