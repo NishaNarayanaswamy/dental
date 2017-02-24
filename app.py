@@ -178,6 +178,9 @@ def makeWebhookResult(req):
 			
 			session['calc'] = "inventory"
 			
+			print ("++++++ session: ", session)
+			print ("++++++ session calc: ", session.get('calc') )
+			
 			temp = req.get("result").get("contexts")
 			if temp[0].get("name") == 'calc':
 				print 'hereee'
@@ -187,7 +190,6 @@ def makeWebhookResult(req):
 			#print inventory_json
 					
 		elif req.get("result").get("action") == 'no_inventory':
-			print " ++++++++++++++++++++ ", session.get("calc")
 			speech = "Good-bye!"
 		
 		elif req.get("result").get("action") == 'read_first_item':
