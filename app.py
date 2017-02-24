@@ -160,9 +160,10 @@ def makeWebhookResult(req):
 		
 		elif req.get("result").get("action") == 'inventory':
 			speech = "Based on your scheduled appointments, you will require some additional supplies, totaling $100. ...Would you like to hear the list of supplies required?"
-			temp = req.get("result").get("context")
-			print temp
-		
+			temp = req.get("result").get("contexts")
+			if temp[0].get("name") == 'calc':
+				print 'hereee'
+				temp[0]['parameters'] = {10}
 					
 		elif req.get("result").get("action") == 'no_inventory':
 			speech = "Good-bye!"
