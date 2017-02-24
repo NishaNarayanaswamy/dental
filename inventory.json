@@ -1,0 +1,17 @@
+{
+	"inventory":[
+		{
+			"Key": "ItemDesc",
+			"Value": [
+				{
+					"itemname": "exam gloves",
+					"price": "10"
+				},
+				{
+					"itemname": "dental floss",
+					"price": "20"
+				},
+			]
+		}
+	]
+}
