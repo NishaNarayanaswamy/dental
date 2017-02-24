@@ -20,6 +20,9 @@ from flask import make_response
 # start app in global layout
 app = Flask(__name__)
 
+# secret key for session
+app.secret_key = "123456"
+
 @app.route('/webhook', methods=['POST'])
 def webhook():
 	req = request.get_json(silent=True, force=True)
