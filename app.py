@@ -10,7 +10,7 @@ import datetime
 import re
 import math
 from flask import Flask
-from flask import request
+from flask import request, session
 from flask import make_response
 
 #from rq import Queue
@@ -160,12 +160,19 @@ def makeWebhookResult(req):
 		
 		elif req.get("result").get("action") == 'inventory':
 			speech = "Based on your scheduled appointments, you will require some additional supplies, totaling $100. ...Would you like to hear the list of supplies required?"
+			
+			session['calc'] = "testing 1"
+			
 			temp = req.get("result").get("contexts")
 			if temp[0].get("name") == 'calc':
 				print 'hereee'
 				temp[0]['parameters'] = {10}
+				
+			#inventory_json = requests.get("https://github.com/NishaNarayanaswamy/dental/blob/master/inventory.json")
+			#print inventory_json
 					
 		elif req.get("result").get("action") == 'no_inventory':
+			print session['calc']
 			speech = "Good-bye!"
 		
 		elif req.get("result").get("action") == 'read_first_item':
