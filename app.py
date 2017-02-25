@@ -199,6 +199,9 @@ def makeWebhookResult(req):
 				print os.path.realpath(outfile.name)
 							
 		elif req.get("result").get("action") == 'no_inventory':
+			with open('/app/inventory.txt', 'r') as outfile:
+				line2 = outfile.readline()
+				print " ++++++++++ read after write: +++++++++++++++++", line2
 			speech = "Good-bye!"
 		
 		elif req.get("result").get("action") == 'read_first_item':
