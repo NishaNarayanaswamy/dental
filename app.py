@@ -174,7 +174,7 @@ def makeWebhookResult(req):
 						
 			with open('/app/inventory.txt', 'r') as outfile:
 				counter = int( outfile.readline().split('=')[1] )
-				print " ++++++++++ read file line 1: +++++++++++++++++", line
+				print " ++++++++++ read file line 1: +++++++++++++++++", counter
 			
 			with open('/app/inventory.txt', 'w') as outfile:
 				counter = counter + 1
@@ -185,6 +185,7 @@ def makeWebhookResult(req):
 		elif req.get("result").get("action") == 'no_inventory':
 			with open('/app/inventory.txt', 'r') as outfile:
 				counter = int( outfile.readline().split('=')[1] )
+				print '+++++++++++++++++++++', counter
 				
 			with open('/app/inventory.txt', 'w') as outfile:
 				counter = counter + 1
@@ -195,6 +196,7 @@ def makeWebhookResult(req):
 		elif req.get("result").get("action") == 'read_first_item':
 			with open('/app/inventory.txt', 'r') as outfile:
 				counter = int( outfile.readline().split('=')[1] )
+				print '+++++++++++++++++++++', counter
 				
 			with open('/app/inventory.txt', 'w') as outfile:
 				counter = counter + 1
@@ -206,6 +208,7 @@ def makeWebhookResult(req):
 		elif req.get("result").get("action") == 'confirm_item':
 			with open('/app/inventory.txt', 'r') as outfile:
 				counter = int( outfile.readline().split('=')[1] )
+				print '+++++++++++++++++++++', counter
 				
 			with open('/app/inventory.txt', 'w') as outfile:
 				counter = counter + 1
@@ -217,6 +220,7 @@ def makeWebhookResult(req):
 		elif req.get("result").get("action") == 'read_next_item':
 			with open('/app/inventory.txt', 'r') as outfile:
 				counter = int( outfile.readline().split('=')[1] )
+				print '+++++++++++++++++++++', counter
 				
 			with open('/app/inventory.txt', 'w') as outfile:
 				counter = counter + 1
@@ -228,6 +232,7 @@ def makeWebhookResult(req):
 		elif req.get("result").get("action") == 'invoice':
 			with open('/app/inventory.txt', 'r') as outfile:
 				counter = int( outfile.readline().split('=')[1] )
+				print '+++++++++++++++++++++', counter
 				
 			with open('/app/inventory.txt', 'w') as outfile:
 				counter = counter + 1
