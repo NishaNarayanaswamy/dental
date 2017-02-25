@@ -178,7 +178,7 @@ def makeWebhookResult(req):
 			
 			with open('/app/inventory.txt', 'w') as outfile:
 				counter = counter + 1
-				outfile.write( str(counter) )
+				outfile.write( "counter="+str(counter) )
 				print '++++++++++++ writing to file +++++++++++++ '
 			
 								
@@ -189,7 +189,7 @@ def makeWebhookResult(req):
 				
 			with open('/app/inventory.txt', 'w') as outfile:
 				counter = counter + 1
-				outfile.write( str(counter) )
+				outfile.write( "counter="+str(counter) )
 				print '++++++++++++ writing to file +++++++++++++ '
 			speech = "Good-bye!"
 		
@@ -200,7 +200,7 @@ def makeWebhookResult(req):
 				
 			with open('/app/inventory.txt', 'w') as outfile:
 				counter = counter + 1
-				outfile.write( str(counter) )
+				outfile.write( "counter="+str(counter) )
 				print '++++++++++++ writing to file +++++++++++++ '
 			
 			speech = "Kirkland Signature Nitrile Exam Glove Medium, 2-Pack, 200-Count. Would you like to order this item?"
@@ -212,7 +212,7 @@ def makeWebhookResult(req):
 				
 			with open('/app/inventory.txt', 'w') as outfile:
 				counter = counter + 1
-				outfile.write( str(counter) )
+				outfile.write( "counter="+str(counter) )
 				print '++++++++++++ writing to file +++++++++++++ '
 				
 			speech = "Item has been placed. Would you like to continue?"
@@ -224,7 +224,7 @@ def makeWebhookResult(req):
 				
 			with open('/app/inventory.txt', 'w') as outfile:
 				counter = counter + 1
-				outfile.write( str(counter) )
+				ooutfile.write( "counter="+str(counter) )
 				print '++++++++++++ writing to file +++++++++++++ '
 			
 			speech = "Walgreens Dental Mirror, Pick & Scaler Kit. Would you like to order this item?"
@@ -236,7 +236,7 @@ def makeWebhookResult(req):
 				
 			with open('/app/inventory.txt', 'w') as outfile:
 				counter = counter + 1
-				outfile.write( str(counter) )
+				outfile.write( "counter="+str(counter))
 				print '++++++++++++ writing to file +++++++++++++ '
 			
 			speech = "Item has been placed. An invoice of #calc.price1 + #calc.price2 has been emailed to you from Google Express."
