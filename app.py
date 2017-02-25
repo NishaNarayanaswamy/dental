@@ -173,8 +173,9 @@ def makeWebhookResult(req):
 			speech = "Based on your scheduled appointments, you will require some additional supplies, totaling $100. ...Would you like to hear the list of supplies required?"
 						
 			with open('/app/inventory.txt', 'r') as outfile:
-				index = int( (outfile.readline().split(';')[0]).split('=')[1] )
-				inv_tot = index = int( (outfile.readline().split(';')[1]).split('=')[1] )
+				line = outfile.readline()
+				index = int( (line.split(';')[0]).split('=')[1] )
+				inv_tot = index = int( (line.split(';')[1]).split('=')[1] )
 				print " ++++++++++ read file line 1: +++++++++++++++++", index, inv_tot
 			
 			with open('/app/inventory.txt', 'w') as outfile:
@@ -186,8 +187,9 @@ def makeWebhookResult(req):
 								
 		elif req.get("result").get("action") == 'no_inventory':
 			with open('/app/inventory.txt', 'r') as outfile:
-				index = int( (outfile.readline().split(';')[0]).split('=')[1] )
-				inv_tot = index = int( (outfile.readline().split(';')[1]).split('=')[1] )
+				line = outfile.readline()
+				index = int( (line.split(';')[0]).split('=')[1] )
+				inv_tot = index = int( (line.split(';')[1]).split('=')[1] )
 				print " ++++++++++ read file line 1: +++++++++++++++++", index, inv_tot
 				
 			
