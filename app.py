@@ -187,12 +187,14 @@ def makeWebhookResult(req):
 			with open('/app/inventory.txt', 'r') as outfile:
 				line = outfile.readline()
 				print " ++++++++++ read file line 1: +++++++++++++++++", line
-				
+			
+			with open('/app/inventory.txt', 'w') as outfile:
 				outfile.write('hello world')
 				print '++++++++++++ writing to file +++++++++++++ '
-				
+			
+			with open('/app/inventory.txt', 'r') as outfile:
 				line2 = outfile.readline()
-				print " ++++++++++ read after write: +++++++++++++++++", line
+				print " ++++++++++ read after write: +++++++++++++++++", line2
 				
 				print os.path.realpath(outfile.name)
 							
