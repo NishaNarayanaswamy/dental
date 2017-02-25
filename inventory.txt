@@ -1,1 +1,1 @@
-item_count_index=0
+item_index=0;invoice_total=0
