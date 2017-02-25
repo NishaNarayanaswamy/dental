@@ -20,19 +20,6 @@ from flask import make_response
 # start app in global layout
 app = Flask(__name__)
 
-# secret key for session
-app.secret_key = "123456"
-
-@app.route('/')
-def index():
-	sumSessionCounter()
-
-def sumSessionCounter():
-	try:
-		session['calc'] = "init"
-	except KeyError:
-		session['calc'] = "empty"
-
 @app.route('/webhook', methods=['POST'])
 def webhook():
 	
@@ -58,6 +45,7 @@ def makeWebhookResult(req):
 	#domain = login_response['profiles'][0]['profile_type']
 	request_key = '026c6248268b824ef8f9e829f3425aa6'
 	domain = 'Dental'
+	counter = 0 #init counter
 	
 	# inventory items
 	inventory_list = {  "items": ["",    # Keep 0th index empty
@@ -183,37 +171,69 @@ def makeWebhookResult(req):
 		
 		elif req.get("result").get("action") == 'inventory':
 			speech = "Based on your scheduled appointments, you will require some additional supplies, totaling $100. ...Would you like to hear the list of supplies required?"
-			
+						
 			with open('/app/inventory.txt', 'r') as outfile:
-				line = outfile.readline()
+				counter = int( outfile.readline().split('=')[1] )
 				print " ++++++++++ read file line 1: +++++++++++++++++", line
 			
 			with open('/app/inventory.txt', 'w') as outfile:
-				outfile.write('hello world')
+				counter = counter + 1
+				outfile.write( str(counter) )
 				print '++++++++++++ writing to file +++++++++++++ '
 			
-			with open('/app/inventory.txt', 'r') as outfile:
-				line2 = outfile.readline()
-				print " ++++++++++ read after write: +++++++++++++++++", line2
-				
-				print os.path.realpath(outfile.name)
-							
+								
 		elif req.get("result").get("action") == 'no_inventory':
 			with open('/app/inventory.txt', 'r') as outfile:
-				line2 = outfile.readline()
-				print " ++++++++++ read after write: +++++++++++++++++", line2
+				counter = int( outfile.readline().split('=')[1] )
+				
+			with open('/app/inventory.txt', 'w') as outfile:
+				counter = counter + 1
+				outfile.write( str(counter) )
+				print '++++++++++++ writing to file +++++++++++++ '
 			speech = "Good-bye!"
 		
 		elif req.get("result").get("action") == 'read_first_item':
+			with open('/app/inventory.txt', 'r') as outfile:
+				counter = int( outfile.readline().split('=')[1] )
+				
+			with open('/app/inventory.txt', 'w') as outfile:
+				counter = counter + 1
+				outfile.write( str(counter) )
+				print '++++++++++++ writing to file +++++++++++++ '
+			
 			speech = "Kirkland Signature Nitrile Exam Glove Medium, 2-Pack, 200-Count. Would you like to order this item?"
 			
 		elif req.get("result").get("action") == 'confirm_item':
+			with open('/app/inventory.txt', 'r') as outfile:
+				counter = int( outfile.readline().split('=')[1] )
+				
+			with open('/app/inventory.txt', 'w') as outfile:
+				counter = counter + 1
+				outfile.write( str(counter) )
+				print '++++++++++++ writing to file +++++++++++++ '
+				
 			speech = "Item has been placed. Would you like to continue?"
 			
 		elif req.get("result").get("action") == 'read_next_item':
+			with open('/app/inventory.txt', 'r') as outfile:
+				counter = int( outfile.readline().split('=')[1] )
+				
+			with open('/app/inventory.txt', 'w') as outfile:
+				counter = counter + 1
+				outfile.write( str(counter) )
+				print '++++++++++++ writing to file +++++++++++++ '
+			
 			speech = "Walgreens Dental Mirror, Pick & Scaler Kit. Would you like to order this item?"
 			
 		elif req.get("result").get("action") == 'invoice':
+			with open('/app/inventory.txt', 'r') as outfile:
+				counter = int( outfile.readline().split('=')[1] )
+				
+			with open('/app/inventory.txt', 'w') as outfile:
+				counter = counter + 1
+				outfile.write( str(counter) )
+				print '++++++++++++ writing to file +++++++++++++ '
+			
 			speech = "Item has been placed. An invoice of #calc.price1 + #calc.price2 has been emailed to you from Google Express."
 	
 			
