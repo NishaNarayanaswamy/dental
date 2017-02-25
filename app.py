@@ -54,7 +54,7 @@ def makeWebhookResult(req):
                                      "3 amalgam",
                                      "4 item 4" ],
                             "quantity": ["", "1", "1", "1","1"],
-                            "itemPrice": ["", "29.95", "98.70", "99", "10"],
+                            "itemPrice": ["", "10", "20", "30", "40"],
                             "itemCount": "4"
                         }
 	
@@ -173,24 +173,24 @@ def makeWebhookResult(req):
 			speech = "Based on your scheduled appointments, you will require some additional supplies, totaling $100. ...Would you like to hear the list of supplies required?"
 						
 			with open('/app/inventory.txt', 'r') as outfile:
-				counter = int( outfile.readline().split('=')[1] )
-				print " ++++++++++ read file line 1: +++++++++++++++++", counter
+				index = int( (outfile.readline().split(';')[0]).split('=')[1] )
+				inv_tot = index = int( (outfile.readline().split(';')[1]).split('=')[1] )
+				print " ++++++++++ read file line 1: +++++++++++++++++", index, inv_tot
 			
 			with open('/app/inventory.txt', 'w') as outfile:
-				counter = counter + 1
-				outfile.write( "counter="+str(counter) )
+				index = index + 1
+				inv_tot = inv_tot + inventory_list['itemPrice'][index]
+				outfile.write( "index="+str(index)+";invoice_total="+str(inv_tot) )
 				print '++++++++++++ writing to file +++++++++++++ '
 			
 								
 		elif req.get("result").get("action") == 'no_inventory':
 			with open('/app/inventory.txt', 'r') as outfile:
-				counter = int( outfile.readline().split('=')[1] )
-				print '+++++++++++++++++++++', counter
+				index = int( (outfile.readline().split(';')[0]).split('=')[1] )
+				inv_tot = index = int( (outfile.readline().split(';')[1]).split('=')[1] )
+				print " ++++++++++ read file line 1: +++++++++++++++++", index, inv_tot
 				
-			with open('/app/inventory.txt', 'w') as outfile:
-				counter = counter + 1
-				outfile.write( "counter="+str(counter) )
-				print '++++++++++++ writing to file +++++++++++++ '
+			
 			speech = "Good-bye!"
 		
 		elif req.get("result").get("action") == 'read_first_item':
@@ -216,6 +216,9 @@ def makeWebhookResult(req):
 				print '++++++++++++ writing to file +++++++++++++ '
 				
 			speech = "Item has been placed. Would you like to continue?"
+			
+		elif req.get("result").get("action") == 'remove_item':
+			speech = "Item was not placed. Would you like to continue?"
 			
 		elif req.get("result").get("action") == 'read_next_item':
 			with open('/app/inventory.txt', 'r') as outfile:
