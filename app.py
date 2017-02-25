@@ -180,7 +180,7 @@ def makeWebhookResult(req):
 			
 			with open('/app/inventory.txt', 'w') as outfile:
 				index = index + 1
-				inv_tot = inv_tot + inventory_list['itemPrice'][index]
+				inv_tot = inv_tot + int(inventory_list['itemPrice'][index])
 				outfile.write( "index="+str(index)+";invoice_total="+str(inv_tot) )
 				print '++++++++++++ writing to file +++++++++++++ '
 			
