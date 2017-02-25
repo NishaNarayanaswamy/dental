@@ -224,7 +224,7 @@ def makeWebhookResult(req):
 				
 			with open('/app/inventory.txt', 'w') as outfile:
 				counter = counter + 1
-				ooutfile.write( "counter="+str(counter) )
+				outfile.write( "counter="+str(counter) )
 				print '++++++++++++ writing to file +++++++++++++ '
 			
 			speech = "Walgreens Dental Mirror, Pick & Scaler Kit. Would you like to order this item?"
