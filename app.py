@@ -176,7 +176,7 @@ def makeWebhookResult(req):
 			with open('inventory.txt', 'r') as outfile:
 				line = outfile.readline()
 				index = int( (line.split(';')[0]).split('=')[1] )
-				inv_tot = index = int( (line.split(';')[1]).split('=')[1] )
+				inv_tot = int( (line.split(';')[1]).split('=')[1] )
 				print " ++++++++++ read file line 1: +++++++++++++++++", line, index, inv_tot
 			
 			with open('inventory.txt', 'w') as outfile:
@@ -190,7 +190,7 @@ def makeWebhookResult(req):
 			with open('inventory.txt', 'r') as outfile:
 				line = outfile.readline()
 				index = int( (line.split(';')[0]).split('=')[1] )
-				inv_tot = index = int( (line.split(';')[1]).split('=')[1] )
+				inv_tot = int( (line.split(';')[1]).split('=')[1] )
 				print " ++++++++++ read file line 1: +++++++++++++++++", line, index, inv_tot
 				
 			
