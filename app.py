@@ -168,7 +168,7 @@ def makeWebhookResult(req):
 		elif req.get("result").get("action") == 'inventory':
 			speech = "Based on your scheduled appointments, you will require some additional supplies, totaling $100. ...Would you like to hear the list of supplies required?"
 						
-			with open('inventory.txt', 'r+') as file:
+			with open('inventory.txt', 'w+') as file:
 				line = file.readline()
 				index = int( (line.split(';')[0]).split('=')[1] )
 				inv_tot = int( (line.split(';')[1]).split('=')[1] )
