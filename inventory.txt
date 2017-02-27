@@ -1,2 +1,1 @@
-index=0;inv_tot=0
-nisha
+index=0;inv_tot=0nisha
