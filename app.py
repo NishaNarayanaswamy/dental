@@ -12,6 +12,9 @@ from flask import Flask
 from flask import request, session, current_app
 from flask import make_response
 
+from flask_assistant import Assistant, ask, tell
+assist = Assistant(app)
+
 # start app in global layout
 app = Flask(__name__)
 
@@ -30,6 +33,11 @@ def webhook():
 	r.headers['Content-Type'] = 'application/json'
 	return r
 
+@assist.action(intent_name='Demo')
+def test():
+	speech = 'Microphone check 1, 2 what is this?'
+	return tell(speech)
+
 def makeWebhookResult(req):
 	
 	# demo account login - use manual request key everyday
@@ -42,9 +50,6 @@ def makeWebhookResult(req):
 	domain = 'Dental'
 	index = 0 #init counter
 	inv_tot = 0
-	
-	const ApiAiAssistant = require('actions-on-google').ApiAiAssistant;
-	const assistant = new ApiAiAssistant({request: request, response: response});
 	
 	# inventory items
 	inventory_list = {  "items": ["",    # Keep 0th index empty
@@ -176,7 +181,7 @@ def makeWebhookResult(req):
 				file.truncate()  #clear file before writing
 				file.write( "index="+str(0)+";invoice_total="+str(0) )
 			speech = "Based on your scheduled appointments, you will require some additional supplies, totaling $100. ...Would you like to hear the list of supplies required?"
-			assistant.tell("bbye bye")
+			
 										
 		elif req.get("result").get("action") == 'no_inventory':
 			speech = "Good-bye!"
