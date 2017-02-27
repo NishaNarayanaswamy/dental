@@ -167,31 +167,27 @@ def makeWebhookResult(req):
 		
 		elif req.get("result").get("action") == 'inventory':
 			speech = "Based on your scheduled appointments, you will require some additional supplies, totaling $100. ...Would you like to hear the list of supplies required?"
-						
-			with open('inventory.txt', 'r+') as file:
-				line = file.readline()
-				index = int( (line.split(';')[0]).split('=')[1] )
-				inv_tot = int( (line.split(';')[1]).split('=')[1] )
-				print " ++++++++++ read file line 1: +++++++++++++++++", line, index, inv_tot
-				index = index + 1
-				inv_tot = inv_tot + int(inventory_list['itemPrice'][index])
-				file.seek(0)
-				file.truncate()
-				file.write( "index="+str(index)+";invoice_total="+str(inv_tot) )
-				print '++++++++++++ writing to file +++++++++++++ ', index, inv_tot
 										
 		elif req.get("result").get("action") == 'no_inventory':
-			with open('inventory.txt', 'r') as file:
-				line = file.readline()
-				#index = int( (line.split(';')[0]).split('=')[1] )
-				#inv_tot = int( (line.split(';')[1]).split('=')[1] )
-				print " ++++++++++ read file line 1: +++++++++++++++++", line
-			
 			speech = "Good-bye!"
 		
 		elif req.get("result").get("action") == 'read_first_item':
-						
-			speech = "Kirkland Signature Nitrile Exam Glove Medium, 2-Pack, 200-Count. Would you like to order this item?"
+			with open('inventory.txt', 'r+') as file:
+				# read session values
+				line = file.readline()
+				index = int( (line.split(';')[0]).split('=')[1] )
+				inv_tot = int( (line.split(';')[1]).split('=')[1] )
+				# update session values
+				index = index + 1
+				file.seek(0)  #return to top of file
+				file.truncate()  #clear file before writing
+				file.write( "index="+str(index)+";invoice_total="+str(inv_tot) )
+				
+			item_price = int(inventory_list["quantity"][index]) * int(inventory_list["price"][index])
+			speech = inventory_list["items"][index] + " totaling " + str(item_price) + ". Would you like to order this item?"
+			print speech 
+				
+			
 			
 		elif req.get("result").get("action") == 'confirm_item':
 							
