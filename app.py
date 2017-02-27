@@ -21,6 +21,7 @@ assist = Assistant(app)
 
 @assist.action('input.welcome')
 def greet_and_start():
+	print 'here'
 	speech = "Hey! good morning!"
 	return tell(speech)
 
