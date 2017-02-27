@@ -43,6 +43,9 @@ def makeWebhookResult(req):
 	index = 0 #init counter
 	inv_tot = 0
 	
+	const ApiAiAssistant = require('actions-on-google').ApiAiAssistant;
+	const assistant = new ApiAiAssistant({request: request, response: response});
+	
 	# inventory items
 	inventory_list = {  "items": ["",    # Keep 0th index empty
                                      "Kirkland Signature Nitrile Exam Glove Medium, 2 Pack, 200 Count", 
@@ -173,6 +176,7 @@ def makeWebhookResult(req):
 				file.truncate()  #clear file before writing
 				file.write( "index="+str(0)+";invoice_total="+str(0) )
 			speech = "Based on your scheduled appointments, you will require some additional supplies, totaling $100. ...Would you like to hear the list of supplies required?"
+			assistant.tell("bbye bye")
 										
 		elif req.get("result").get("action") == 'no_inventory':
 			speech = "Good-bye!"
