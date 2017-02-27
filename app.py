@@ -184,12 +184,20 @@ def makeWebhookResult(req):
 				file.write( "index="+str(index)+";invoice_total="+str(inv_tot) )
 				
 			item_price = int(inventory_list["quantity"][index]) * int(inventory_list["itemPrice"][index])
-			speech = inventory_list["items"][index] + " totaling " + str(item_price) + ". Would you like to order this item?"
-			print speech 
-				
-			
+			speech = inventory_list["items"][index] + " totaling $" + str(item_price) + ". Would you like to order this item?"
 			
 		elif req.get("result").get("action") == 'confirm_item':
+			with open('inventory.txt', 'r+') as file:
+				# read session values
+				line = file.readline()
+				index = int( (line.split(';')[0]).split('=')[1] )
+				inv_tot = int( (line.split(';')[1]).split('=')[1] )
+				print '++++++line', line
+				# update session values
+				inv_tot = inv_tot + int(inventory_list['itemPrice'][index])
+				file.seek(0)  #return to top of file
+				file.truncate()  #clear file before writing
+				file.write( "index="+str(index)+";invoice_total="+str(inv_tot) )
 							
 			speech = "Item has been placed. Would you like to continue?"
 			
@@ -197,12 +205,24 @@ def makeWebhookResult(req):
 			speech = "Item was not placed. Would you like to continue?"
 			
 		elif req.get("result").get("action") == 'read_next_item':
+			with open('inventory.txt', 'r+') as file:
+				# read session values
+				line = file.readline()
+				index = int( (line.split(';')[0]).split('=')[1] )
+				inv_tot = int( (line.split(';')[1]).split('=')[1] )
+				print '++++++line', line
+				# update session values
+				index = index + 1
+				file.seek(0)  #return to top of file
+				file.truncate()  #clear file before writing
+				file.write( "index="+str(index)+";invoice_total="+str(inv_tot) )
 						
-			speech = "Walgreens Dental Mirror, Pick & Scaler Kit. Would you like to order this item?"
+			item_price = int(inventory_list["quantity"][index]) * int(inventory_list["itemPrice"][index])
+			speech = inventory_list["items"][index] + " totaling $" + str(item_price) + ". Would you like to order this item?"
 			
 		elif req.get("result").get("action") == 'invoice':
 						
-			speech = "Item has been placed. An invoice of #calc.price1 + #calc.price2 has been emailed to you from Google Express."
+			speech = "Item has been placed. An invoice of $" + str(inv_tot) + " has been emailed to you from Google Express."
 	
 			
 	return {
