@@ -18,6 +18,12 @@ assist = Assistant(app)
 # start app in global layout
 app = Flask(__name__)
 
+
+@assist.action('input.welcome')
+def greet_and_start():
+	speech = "Hey! good morning!"
+	return tell(speech)
+
 @app.route('/webhook', methods=['POST'])
 def webhook():
 	
