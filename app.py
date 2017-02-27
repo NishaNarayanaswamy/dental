@@ -176,6 +176,7 @@ def makeWebhookResult(req):
 				index = index + 1
 				inv_tot = inv_tot + int(inventory_list['itemPrice'][index])
 				file.seek(0)
+				file.truncate()
 				file.write( "index="+str(index)+";invoice_total="+str(inv_tot) )
 				print '++++++++++++ writing to file +++++++++++++ ', index, inv_tot
 										
