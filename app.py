@@ -243,7 +243,8 @@ def makeWebhookResult(req):
 				# read session values
 				line = file.readline()
 				index = int( (line.split(';')[0]).split('=')[1] )
-				inv_tot = int( (line.split(';')[1]).split('=')[1] )		
+				inv_tot = int( (line.split(';')[1]).split('=')[1] )	
+			speech = "Ok. An invoice of $" + str(inv_tot) + " has been emailed to you from Google Express."
 			
 	
 			
