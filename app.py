@@ -1,5 +1,4 @@
-#from reports import makeWebhookResult
-#import time
+
 import urllib
 import json
 import os
@@ -12,10 +11,6 @@ import math
 from flask import Flask
 from flask import request, session, current_app
 from flask import make_response
-
-#from rq import Queue
-#from worker import conn
-#q = Queue(connection=conn)
 
 # start app in global layout
 app = Flask(__name__)
@@ -43,17 +38,17 @@ def makeWebhookResult(req):
 	#login_response = json.load(html)
 	#request_key = login_response['profiles'][0]['request_key']
 	#domain = login_response['profiles'][0]['profile_type']
-	request_key = '026c6248268b824ef8f9e829f3425aa6'
+	request_key = 'ac4e26b4d3f8d2c747e315c68fc53fbc'
 	domain = 'Dental'
 	index = 0 #init counter
 	inv_tot = 0
 	
 	# inventory items
 	inventory_list = {  "items": ["",    # Keep 0th index empty
-                                     "1 exam gloves", 
-                                     "2 sanitizer", 
-                                     "3 amalgam",
-                                     "4 item 4" ],
+                                     "Kirkland Signature Nitrile Exam Glove Medium, 2 Pack, 200 Count", 
+                                     "Walgreens Dental Mirror, Pick & Scaler Kit", 
+                                     "Dentemp OS Dental Filling & Cap Repair Material",
+                                     "Essential Medical Terrycloth Bib" ],
                             "quantity": ["", "1", "1", "1","1"],
                             "itemPrice": ["", "10", "20", "30", "40"],
                             "itemCount": "4"
@@ -173,26 +168,22 @@ def makeWebhookResult(req):
 		elif req.get("result").get("action") == 'inventory':
 			speech = "Based on your scheduled appointments, you will require some additional supplies, totaling $100. ...Would you like to hear the list of supplies required?"
 						
-			with open('inventory.txt', 'r') as outfile:
+			with open('inventory.txt', 'r+') as outfile:
 				line = outfile.readline()
 				index = int( (line.split(';')[0]).split('=')[1] )
 				inv_tot = int( (line.split(';')[1]).split('=')[1] )
 				print " ++++++++++ read file line 1: +++++++++++++++++", line, index, inv_tot
-			
-			with open('inventory.txt', 'w') as outfile:
 				index = index + 1
 				inv_tot = inv_tot + int(inventory_list['itemPrice'][index])
 				outfile.write( "index="+str(index)+";invoice_total="+str(inv_tot) )
 				print '++++++++++++ writing to file +++++++++++++ '
-			
-								
+										
 		elif req.get("result").get("action") == 'no_inventory':
 			with open('inventory.txt', 'r') as outfile:
 				line = outfile.readline()
 				index = int( (line.split(';')[0]).split('=')[1] )
 				inv_tot = int( (line.split(';')[1]).split('=')[1] )
 				print " ++++++++++ read file line 1: +++++++++++++++++", line, index, inv_tot
-				
 			
 			speech = "Good-bye!"
 		
