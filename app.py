@@ -198,12 +198,24 @@ def makeWebhookResult(req):
 				file.seek(0)  #return to top of file
 				file.truncate()  #clear file before writing
 				file.write( "index="+str(index)+";invoice_total="+str(inv_tot) )
-							
-			speech = "Item has been placed. Would you like to continue?"
+			
+			if index == int(inventory_list["itemCount"]) :  # last item, calc invoice, end conversation
+				speech = "Item has been placed. An invoice of $" + str(inv_tot) + " has been emailed to you from Google Express."
+			else:
+				speech = "Item has been placed. Would you like to continue?"
 			
 		elif req.get("result").get("action") == 'remove_item':
-			speech = "Item was not placed. Would you like to continue?"
+			with open('inventory.txt', 'r+') as file:
+				# read session values
+				line = file.readline()
+				index = int( (line.split(';')[0]).split('=')[1] )
+				inv_tot = int( (line.split(';')[1]).split('=')[1]  )
 			
+			if index == int(inventory_list["itemCount"]) :  # last item, calc invoice, end conversation
+				speech = "Item was not placed. An invoice of $" + str(inv_tot) + " has been emailed to you from Google Express."
+			else:
+				speech = "Item was not placed. Would you like to continue?"
+					
 		elif req.get("result").get("action") == 'read_next_item':
 			with open('inventory.txt', 'r+') as file:
 				# read session values
@@ -216,7 +228,7 @@ def makeWebhookResult(req):
 				file.seek(0)  #return to top of file
 				file.truncate()  #clear file before writing
 				file.write( "index="+str(index)+";invoice_total="+str(inv_tot) )
-						
+				
 			item_price = int(inventory_list["quantity"][index]) * int(inventory_list["itemPrice"][index])
 			speech = inventory_list["items"][index] + " totaling $" + str(item_price) + ". Would you like to order this item?"
 			
@@ -226,7 +238,7 @@ def makeWebhookResult(req):
 				line = file.readline()
 				index = int( (line.split(';')[0]).split('=')[1] )
 				inv_tot = int( (line.split(';')[1]).split('=')[1] )		
-			speech = "Item has been placed. An invoice of $" + str(inv_tot) + " has been emailed to you from Google Express."
+			
 	
 			
 	return {
