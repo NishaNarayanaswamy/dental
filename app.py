@@ -33,11 +33,6 @@ def webhook():
 	r.headers['Content-Type'] = 'application/json'
 	return r
 
-@assist.action(intent_name='Demo')
-def test():
-	speech = 'Microphone check 1, 2 what is this?'
-	return tell(speech)
-
 def makeWebhookResult(req):
 	
 	# demo account login - use manual request key everyday
