@@ -221,7 +221,11 @@ def makeWebhookResult(req):
 			speech = inventory_list["items"][index] + " totaling $" + str(item_price) + ". Would you like to order this item?"
 			
 		elif req.get("result").get("action") == 'invoice':
-						
+			with open('inventory.txt', 'r') as file:
+				# read session values
+				line = file.readline()
+				index = int( (line.split(';')[0]).split('=')[1] )
+				inv_tot = int( (line.split(';')[1]).split('=')[1] )		
 			speech = "Item has been placed. An invoice of $" + str(inv_tot) + " has been emailed to you from Google Express."
 	
 			
