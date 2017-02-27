@@ -183,7 +183,7 @@ def makeWebhookResult(req):
 				file.truncate()  #clear file before writing
 				file.write( "index="+str(index)+";invoice_total="+str(inv_tot) )
 				
-			item_price = int(inventory_list["quantity"][index]) * int(inventory_list["price"][index])
+			item_price = int(inventory_list["quantity"][index]) * int(inventory_list["itemPrice"][index])
 			speech = inventory_list["items"][index] + " totaling " + str(item_price) + ". Would you like to order this item?"
 			print speech 
 				
