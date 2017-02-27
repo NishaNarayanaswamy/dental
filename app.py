@@ -182,9 +182,9 @@ def makeWebhookResult(req):
 		elif req.get("result").get("action") == 'no_inventory':
 			with open('inventory.txt', 'r') as file:
 				line = file.readline()
-				index = int( (line.split(';')[0]).split('=')[1] )
-				inv_tot = int( (line.split(';')[1]).split('=')[1] )
-				print " ++++++++++ read file line 1: +++++++++++++++++", line, index, inv_tot
+				#index = int( (line.split(';')[0]).split('=')[1] )
+				#inv_tot = int( (line.split(';')[1]).split('=')[1] )
+				print " ++++++++++ read file line 1: +++++++++++++++++", line
 			
 			speech = "Good-bye!"
 		
