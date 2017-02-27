@@ -166,6 +166,12 @@ def makeWebhookResult(req):
 					speech = "You have no scheduled appointments today."
 		
 		elif req.get("result").get("action") == 'inventory':
+			with open('inventory.txt', 'r+') as file:
+				# read session values
+				line = file.readline()
+				file.seek(0)  #return to top of file
+				file.truncate()  #clear file before writing
+				file.write( "index="+str(0)+";invoice_total="+str(0) )
 			speech = "Based on your scheduled appointments, you will require some additional supplies, totaling $100. ...Would you like to hear the list of supplies required?"
 										
 		elif req.get("result").get("action") == 'no_inventory':
