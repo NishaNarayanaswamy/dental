@@ -13,11 +13,11 @@ from flask import request, session, current_app
 from flask import make_response
 
 from flask_assistant import Assistant, ask, tell
-assist = Assistant(app)
 
 # start app in global layout
 app = Flask(__name__)
 
+assist = Assistant(app)
 
 @assist.action('input.welcome')
 def greet_and_start():
