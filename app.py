@@ -12,18 +12,8 @@ from flask import Flask
 from flask import request, session, current_app
 from flask import make_response
 
-from flask_assistant import Assistant, ask, tell
-
 # start app in global layout
 app = Flask(__name__)
-
-assist = Assistant(app)
-
-@assist.action('input.welcome')
-def greet_and_start():
-	print 'here'
-	speech = "Hey! good morning!"
-	return tell(speech)
 
 @app.route('/webhook', methods=['POST'])
 def webhook():
