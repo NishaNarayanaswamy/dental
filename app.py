@@ -169,6 +169,7 @@ def makeWebhookResult(req):
 			with open('inventory.txt', 'r+') as file:
 				# read session values
 				line = file.readline()
+				print '#1 - ', line
 				file.seek(0)  #return to top of file
 				file.truncate()  #clear file before writing
 				file.write( "index="+str(0)+";invoice_total="+str(0) )
@@ -182,6 +183,7 @@ def makeWebhookResult(req):
 			with open('inventory.txt', 'r+') as file:
 				# read session values
 				line = file.readline()
+				print '#2 - ', line
 				index = int( (line.split(';')[0]).split('=')[1] )
 				inv_tot = int( (line.split(';')[1]).split('=')[1] )
 				# update session values
@@ -197,6 +199,7 @@ def makeWebhookResult(req):
 			with open('inventory.txt', 'r+') as file:
 				# read session values
 				line = file.readline()
+				print '#3 - ', line
 				index = int( (line.split(';')[0]).split('=')[1] )
 				inv_tot = int( (line.split(';')[1]).split('=')[1] )
 				print '++++++line', line
@@ -215,6 +218,7 @@ def makeWebhookResult(req):
 			with open('inventory.txt', 'r+') as file:
 				# read session values
 				line = file.readline()
+				print '#4 - ', line
 				index = int( (line.split(';')[0]).split('=')[1] )
 				inv_tot = int( (line.split(';')[1]).split('=')[1]  )
 			
@@ -227,6 +231,7 @@ def makeWebhookResult(req):
 			with open('inventory.txt', 'r+') as file:
 				# read session values
 				line = file.readline()
+				print '#5 - ', line
 				index = int( (line.split(';')[0]).split('=')[1] )
 				inv_tot = int( (line.split(';')[1]).split('=')[1] )
 				print '++++++line', line
@@ -243,6 +248,7 @@ def makeWebhookResult(req):
 			with open('inventory.txt', 'r') as file:
 				# read session values
 				line = file.readline()
+				print '#6 - ', line
 				index = int( (line.split(';')[0]).split('=')[1] )
 				inv_tot = int( (line.split(';')[1]).split('=')[1] )	
 			speech = "Ok. An invoice of $" + str(inv_tot) + " has been emailed to you from Google Express."
