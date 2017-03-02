@@ -15,6 +15,9 @@ from flask import make_response
 # start app in global layout
 app = Flask(__name__)
 
+# session file
+file_path = os.path.realpath("inventory.txt")
+
 @app.route('/webhook', methods=['POST'])
 def webhook():
 	
@@ -166,7 +169,7 @@ def makeWebhookResult(req):
 					speech = "You have no scheduled appointments today."
 		
 		elif req.get("result").get("action") == 'inventory':
-			with open('inventory.txt', 'r+') as file:
+			with open(file_path, 'r+') as file:
 				# read session values
 				line = file.readline()
 				print '#1 - ', line
@@ -180,7 +183,7 @@ def makeWebhookResult(req):
 			speech = "Good-bye!"
 		
 		elif req.get("result").get("action") == 'read_first_item':
-			with open('inventory.txt', 'r+') as file:
+			with open(file_path, 'r+') as file:
 				# read session values
 				line = file.readline()
 				print '#2 - ', line
@@ -196,7 +199,7 @@ def makeWebhookResult(req):
 			speech = inventory_list["items"][index] + " totaling $" + str(item_price) + ". Would you like to order this item?"
 			
 		elif req.get("result").get("action") == 'confirm_item':
-			with open('inventory.txt', 'r+') as file:
+			with open(file_path, 'r+') as file:
 				# read session values
 				line = file.readline()
 				print '#3 - ', line
@@ -215,7 +218,7 @@ def makeWebhookResult(req):
 				speech = "Item has been placed. Would you like to continue?"
 			
 		elif req.get("result").get("action") == 'remove_item':
-			with open('inventory.txt', 'r+') as file:
+			with open(file_path, 'r+') as file:
 				# read session values
 				line = file.readline()
 				print '#4 - ', line
@@ -228,7 +231,7 @@ def makeWebhookResult(req):
 				speech = "Item was not placed. Would you like to continue?"
 					
 		elif req.get("result").get("action") == 'read_next_item':
-			with open('inventory.txt', 'r+') as file:
+			with open(file_path, 'r+') as file:
 				# read session values
 				line = file.readline()
 				print '#5 - ', line
@@ -245,7 +248,7 @@ def makeWebhookResult(req):
 			speech = inventory_list["items"][index] + " totaling $" + str(item_price) + ". Would you like to order this item?"
 			
 		elif req.get("result").get("action") == 'invoice':
-			with open('inventory.txt', 'r') as file:
+			with open(file_path, 'r') as file:
 				# read session values
 				line = file.readline()
 				print '#6 - ', line
